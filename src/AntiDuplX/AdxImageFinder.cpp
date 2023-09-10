@@ -51,7 +51,7 @@ namespace Adx
         fs::file_status status = fs::status(path);
         if (!fs::exists(status))
         {
-            CPL_LOG_SS(Error, "Path '" << path << "' is not exist!");
+            CPL_LOG_SS(Error, "Path '" << path << "' does not exist!");
             return false;
         }
         if (!fs::is_directory(status))

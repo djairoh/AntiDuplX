@@ -41,6 +41,25 @@ namespace Adx
         return true;
     }
 
+    bool ResultHandler::InDupsFile(const String& og, const String& dup) {
+        if (_imagePaths.empty()) {
+            return false;
+        }
+
+        std::unordered_multimap<String, String>::iterator it = _imagePaths.find(og);
+        if (it == _imagePaths.end()) {
+            return false;
+        }
+
+        for (; it != _imagePaths.end(); it++) {
+            if (it->second == dup) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     bool ResultHandler::SaveOutFile()
     {
         if (_options.outFile.empty())
@@ -85,16 +104,18 @@ namespace Adx
                 }
                 bads++;
             }
-            if (info.duplicate)
+            if (info.duplicate && ! InDupsFile(info.path, info.duplicate->path))
             {
-                ofs << info.path << "\t";
+                ofs << info.path;
                 ofs << info.width << "x" << info.height << "\t";
                 ofs << info.size / 1024 << "kb\t";
                 ofs << info.difference << "\t";
-                ofs << info.duplicate->path << "\t";
+                ofs << std::endl;
+                ofs << info.duplicate->path;
                 ofs << info.duplicate->width << "x" << info.duplicate->height << "\t";
                 ofs << info.duplicate->size / 1024 << "kb";
                 ofs << std::endl;
+                ofs << '\n';
                 if (_options.deleteDupls)
                 {
                     if (!fs::remove(info.path))

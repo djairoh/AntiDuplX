@@ -49,6 +49,7 @@ namespace Adx
         String outFile;
         bool deleteDupls;
         bool deleteBads;
+        String dupFile;
 
         Options(int argc, char* argv[])
             : ArgsParser(argc, argv, true)
@@ -74,6 +75,7 @@ namespace Adx
             outFile = GetArg2("-of", "--outFile", "out.txt", false);
             deleteDupls = Cpl::ToVal<bool>(GetArg2("-dd", "--deleteDupls", "0"));
             deleteBads = Cpl::ToVal<bool>(GetArg2("-db", "--deleteBads", "0"));
+            dupFile = GetArg2("-df", "--dupFile", ".", false);
         }
 
         ~Options()
@@ -95,6 +97,8 @@ namespace Adx
             std::cout << "                                                       By default it is equal to 0.05." << std::endl << std::endl;
             std::cout << "  -of=./dupl_list.txt or --outFile=./dupl_list.txt   - a file name to save list with found duplicated and damaged images." << std::endl;
             std::cout << "                                                       A path to image with poor quality is printed at the beginning of line." << std::endl << std::endl;
+            std::cout << "  -df=./duplicate.txt or --dupFile=./duplicate.txt   - a file name which contains imagenames that are to be excluded from the comparison." << std::endl;
+            std::cout << "                                                       The formatting is the same as for the outFile." << std::endl << std::endl;
             std::cout << "Also you can use parameters: " << std::endl << std::endl;
             std::cout << "  --help or -h                       - to print this help message." << std::endl << std::endl;
             std::cout << "  --version or -v                    - to print AntiDuplX version." << std::endl << std::endl;

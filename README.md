@@ -9,7 +9,7 @@ On Ubuntu-2022.04.2 TLS there is following way to build AntiDuplX:
 
 	sudo apt-get update
 	sudo apt-get install git cmake g++ nasm
-	git clone -b master --recurse-submodules -v https://github.com/ermig1979/AntiDuplX.git AntiDuplX
+	git clone -b master --recurse-submodules -v https://github.com/djairoh/AntiDuplX.git AntiDuplX
 	cd AntiDuplX
 	mkdir build
 	cmake ./prj/cmake -B ./build -DCMAKE_BUILD_TYPE=Release
@@ -52,3 +52,4 @@ Also you can use parameters:
 * `--threadNumber=4` or `-tn=4` - a number of work threads to load and compare images. By default this parameter is equal to -1 (use of all available threads).
 * `--deleteDupls=1` or `-dd=1` - a flag to auto delete found image duplicates. By default this parameter is turned off.
 * `--deleteBads=1` or `-db=1` - a flag to auto delete found bad (damaged) images. By default this parameter is turned off.
+* `--dupFile=duplicates.txt` or `-dp=duplicates.txt` - a file name which contains imagenames that are to be excluded from the comparison.

@@ -31,7 +31,7 @@ namespace Adx
 		, _imageFinder(options, _imageInfos)
 		, _imageLoader(options, _imageInfos)
 		, _imageMatcher(options, _imageInfos)
-		, _resultHandler(options, _imageInfos)
+		, _resultHandler(options, _imageInfos, _imagePaths)
 	{
 	}
 
@@ -40,11 +40,43 @@ namespace Adx
 		for (size_t i = 0; i < _imageInfos.size(); ++i)
 			delete _imageInfos[i];
 		_imageInfos.clear();
+
+		
+	}
+
+	bool Engine::LoadDups() {
+		fs::path path(_options.dupFile);
+		std::ifstream ifs(_options.dupFile.c_str());
+    if (!ifs.is_open()) {
+      CPL_LOG_SS(Error, "Can't open duplicates file '" << path.string() << "'!");
+      return false;
+    }
+
+		String dup1, dup2;
+		while(getline(ifs, dup1) && getline(ifs, dup2)) {
+			if (dup1.empty() || dup2.empty()) {
+				CPL_LOG_SS(Error, "Unexpected formatting in duplicates file.");
+				return false;
+			}
+
+			_imagePaths.insert(make_pair(dup1, dup2));			
+
+			getline(ifs, dup2);
+			if (! dup2.empty()) {
+				CPL_LOG_SS(Error, "Unexpected formatting in duplicates file.");
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	bool Engine::Run()
 	{
 		CPL_PERF_FUNC();
+
+		if (!LoadDups())
+			return false;
 
 		if (!_imageFinder.Run())
 			return false;

@@ -48,6 +48,9 @@ namespace Adx
         ImageLoader _imageLoader;
         ImageMatcher _imageMatcher;
         ResultHandler _resultHandler;
+        ImagePaths _imagePaths;
+
+        bool LoadDups();
     };
 }
 

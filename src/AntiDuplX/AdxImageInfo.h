@@ -25,6 +25,7 @@
 #pragma once
 
 #include "AntiDuplX/AdxCommon.h"
+#include <map>
 
 namespace Adx
 {
@@ -63,6 +64,9 @@ namespace Adx
     };
 
     typedef std::vector<ImageInfo*> ImageInfos;
+
+    typedef std::unordered_multimap<String, String> ImagePaths;
+    
 
     inline String ToStr(SimdImageFileType format)
     {
