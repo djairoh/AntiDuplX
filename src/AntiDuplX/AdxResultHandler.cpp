@@ -91,10 +91,10 @@ namespace Adx
             const ImageInfo& info = *_imageInfos[i];
             if (info.error)
             {
-                ofs << info.path << "\t";
-                ofs << info.width << "x" << info.height << "\t";
-                ofs << info.size / 1024 << "kb";
-                ofs << std::endl;
+                // ofs << info.path << "\t";
+                // ofs << info.width << "x" << info.height << "\t";
+                // ofs << info.size / 1024 << "kb";
+                // ofs << std::endl;
                 if (_options.deleteBads)
                 {
                     if (!fs::remove(info.path))
@@ -107,13 +107,13 @@ namespace Adx
             if (info.duplicate && ! InDupsFile(info.path, info.duplicate->path))
             {
                 ofs << info.path;
-                ofs << info.width << "x" << info.height << "\t";
-                ofs << info.size / 1024 << "kb\t";
-                ofs << info.difference << "\t";
+                // ofs << info.width << "x" << info.height << "\t";
+                // ofs << info.size / 1024 << "kb\t";
+                // ofs << info.difference << "\t";
                 ofs << std::endl;
                 ofs << info.duplicate->path;
-                ofs << info.duplicate->width << "x" << info.duplicate->height << "\t";
-                ofs << info.duplicate->size / 1024 << "kb";
+                // ofs << info.duplicate->width << "x" << info.duplicate->height << "\t";
+                // ofs << info.duplicate->size / 1024 << "kb";
                 ofs << std::endl;
                 ofs << '\n';
                 if (_options.deleteDupls)
