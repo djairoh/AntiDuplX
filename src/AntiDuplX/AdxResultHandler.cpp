@@ -46,16 +46,22 @@ namespace Adx
             return false;
         }
 
-        std::unordered_multimap<String, String>::iterator it = _imagePaths.find(og);
-        if (it == _imagePaths.end()) {
-            return false;
-        }
+        //std::unordered_multimap<String, String>::iterator it = _imagePaths.find(og);
+        //if (it == _imagePaths.end()) {
+        //    return false;
+        //}
+				auto[itr1, rangeEnd1] = _imagePaths.equal_range(dup);
+				for (auto[itr, rangeEnd] = _imagePaths.equal_range(og); itr < rangeEnd; itr++) {
+					if (itr->second == dup || itr2->second == og) {
+						return true;
+					}
+				}
 
-        for (; it != _imagePaths.end(); it++) {
-            if (it->second == dup) {
-                return true;
-            }
-        }
+        //for (; it != _imagePaths.end(); it++) {
+        //    if (it->second == dup) {
+        //        return true;
+        //    }
+        //}
 
         return false;
     }

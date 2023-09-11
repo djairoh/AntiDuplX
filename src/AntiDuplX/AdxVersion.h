@@ -33,5 +33,5 @@
 
 #pragma once
 
-#define ADX_VERSION "1.0.1"
+#define ADX_VERSION "1.0.1.master-f9af8f0"
 
