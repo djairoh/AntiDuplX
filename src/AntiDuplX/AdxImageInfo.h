@@ -25,6 +25,7 @@
 #pragma once
 
 #include "AntiDuplX/AdxCommon.h"
+#include <unordered_map>
 #include <map>
 
 namespace Adx
